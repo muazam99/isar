@@ -11,7 +11,7 @@ dependencies:
   isar: 2.5.0
   build: ^2.2.1
   source_gen: ^1.2.1
-  analyzer: ^3.0.0
+  analyzer: ">=4.6.0 <6.0.0"
   glob: ^2.0.2
   path: ^1.8.0
   dart_style: ^2.2.1
