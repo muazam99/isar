@@ -32,7 +32,7 @@ class ObjectInfo {
   int _generateSafeId(String name) {
     final hash = xxh3(utf8.encode(name));
     if (identical(0, 0.0)) {
-      final safeMaxInt = BigInt.parse('9007199254740991');
+      final safeMaxInt = BigInt.parse('9999999');
       final safeId = BigInt.from(hash).abs() % safeMaxInt;
       return safeId.toInt();
     }
