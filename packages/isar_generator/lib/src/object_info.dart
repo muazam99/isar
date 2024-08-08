@@ -27,17 +27,7 @@ class ObjectInfo {
   final List<ObjectIndex> indexes;
   final List<ObjectLink> links;
 
-  late final id = _generateSafeId(isarName);
-
-  int _generateSafeId(String name) {
-    final hash = xxh3(utf8.encode(name));
-    if (identical(0, 0.0)) {
-      final safeMaxInt = BigInt.parse('9999999');
-      final safeId = BigInt.from(hash).abs() % safeMaxInt;
-      return safeId.toInt();
-    }
-    return hash;
-  }
+  int get id => xxh3(utf8.encode(isarName));
 
   bool get isEmbedded => accessor == null;
 
@@ -187,7 +177,17 @@ class ObjectIndex {
   final bool unique;
   final bool replace;
 
-  late final id = xxh3(utf8.encode(name) as Uint8List);
+  late final id = _generateSafeId(name);
+
+  int _generateSafeId(String name) {
+    final hash = xxh3(utf8.encode(name));
+    if (identical(0, 0.0)) {
+      final safeMaxInt = BigInt.parse('9007199254740991');
+      final safeId = BigInt.from(hash).abs() % safeMaxInt;
+      return safeId.toInt();
+    }
+    return hash;
+  }
 }
 
 class ObjectLink {
