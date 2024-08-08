@@ -27,7 +27,17 @@ class ObjectInfo {
   final List<ObjectIndex> indexes;
   final List<ObjectLink> links;
 
-  int get id => xxh3(utf8.encode(isarName) as Uint8List);
+  late final id = _generateSafeId(isarName);
+
+  int _generateSafeId(String name) {
+    final hash = xxh3(utf8.encode(name));
+    if (identical(0, 0.0)) {
+      final safeMaxInt = BigInt.parse('9007199254740991');
+      final safeId = BigInt.from(hash).abs() % safeMaxInt;
+      return safeId.toInt();
+    }
+    return hash;
+  }
 
   bool get isEmbedded => accessor == null;
 
